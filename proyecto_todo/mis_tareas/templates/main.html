@@ -1,0 +1,19 @@
+{% extends "mis_tareas/master.html" %}
+{% block title %}Mi lista de Tareas{% endblock %}
+
+    {% block content %}
+  <h1>Mi lista de Tareas</h1>
+
+  <button><a href="{% url 'mis_tareas:añadir_tareas.html' %}">Crear Tarea</a></button>
+  <div>
+    {% for tarea in tareas %}
+  <input type= "checkbox" id="titulo" name="tarea"> {{ tarea.titulo }}
+    {% endfor %}
+  </div>
+  <div class="calendario">
+    <h2>Calendario</h2>
+    <!-- aqui va el calendario -->
+
+
+
+    {% endblock %}
