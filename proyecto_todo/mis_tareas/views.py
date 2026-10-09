@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpRequest
 from django.template import loader
+from .forms import TareaForm
 
 def prueba(request):
     return render(request, 'mis_tareas/usuarios.html')
@@ -8,9 +9,10 @@ def prueba(request):
 
 def crear_tarea(request):
     return render(request, 'mis_tareas/crear_tarea.html')
-  
+
 def editar_tarea(request):
-    return render(request, 'mis_tareas/editar_tarea.html')
+    form = TareaForm
+    return render(request, 'mis_tareas/editar_tareas.html', {'form':form})
 
 def eliminar_tarea(request):
     return render(request, 'mis_tareas/eliminar_tarea.html')
