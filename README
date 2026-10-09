@@ -1,0 +1,14 @@
+Proyecto To-Do - Gestor de Tareas con Django:
+
+Aplicacion web sencilla para gestionar tareas personales.Cada usuario se registra , inicia sesion y gestiona solo sus propias tareas:Puede crearlas, editarlas , marcarlas como completadas o borrarlas.
+
+Hecho con Django, Python y CSS.
+
+Funcionalidades:
+- Registro y autenticación de usuarios
+- Creación, edición y eliminación de tareas
+- Marcar tareas como completadas o pendientes con un checkbox.
+- Visualización de tareas por usuario
+- Visualizacion de Calendario mensual 
+- Mensajes de aviso
+
