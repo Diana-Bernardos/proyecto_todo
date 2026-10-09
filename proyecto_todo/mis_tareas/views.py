@@ -7,10 +7,10 @@ def prueba(request):
 
 
 def crear_tarea(request):
-    return render(request, 'mis_tareas/crear_tarea.html')
+    return render(request, 'mis_tareas/añadir_tareas.html')
   
 def editar_tarea(request):
-    return render(request, 'mis_tareas/editar_tarea.html')
+    return render(request, 'mis_tareas/editar_tareas.html')
 
 def eliminar_tarea(request):
-    return render(request, 'mis_tareas/eliminar_tarea.html')
+    return render(request, 'mis_tareas/eliminar_tareas.html')
