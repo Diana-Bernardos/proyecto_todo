@@ -1,0 +1,10 @@
+{%extends "mis_tareas/master.html"%}
+{%block title%}
+Tarea
+{%endblock%}
+
+{%block content%}
+<h1>Mis Tareas</h1>
+{% csrf_token %}
+{{form.as_p}}
+{%endblock%}

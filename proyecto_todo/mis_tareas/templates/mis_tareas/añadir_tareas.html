@@ -1,3 +1,5 @@
+{%extends "mis_tareas/master.html"%}
+{%block title%}
 {% extends "mis_tareas/master.html" %}
 {% block title %}Nueva tarea{% endblock %}
 
@@ -10,3 +12,4 @@
     <a href="{% url 'mis_tareas:añadir_tareas.html' %}">Cancelar</a>
 </form>
 {% endblock %}
+
