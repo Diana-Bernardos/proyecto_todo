@@ -23,10 +23,6 @@ def crear_tarea(request):
     
   
 def editar_tarea(request):
-    return render(request, 'mis_tareas/editar_tareas.html')
-    return render(request, 'mis_tareas/crear_tarea.html')
-
-def editar_tarea(request):
     form = TareaForm
     return render(request, 'mis_tareas/editar_tareas.html', {'form':form})
 
