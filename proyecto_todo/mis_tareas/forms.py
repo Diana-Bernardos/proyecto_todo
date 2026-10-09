@@ -6,3 +6,5 @@ class TareaForm(forms.ModelForm):
         model = Tareas
         fields =['nombre_tarea', 'descripcion', 'estado']
 
+clas
+
