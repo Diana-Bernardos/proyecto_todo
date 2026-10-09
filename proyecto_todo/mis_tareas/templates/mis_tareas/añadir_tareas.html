@@ -1,2 +1,17 @@
+<<<<<<< HEAD
 {%extends "mis_tareas/master.html"%}
 {%block title%}
+=======
+{% extends "mis_tareas/master.html" %}
+{% block title %}Nueva tarea{% endblock %}
+
+{% block content %}
+<h1>Nueva tarea</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+    <a href="{% url 'mis_tareas:lista' %}">Cancelar</a>
+</form>
+{% endblock %}
+>>>>>>> 9f34f7d729bf2b3c49a38adc640b7d5e53430137

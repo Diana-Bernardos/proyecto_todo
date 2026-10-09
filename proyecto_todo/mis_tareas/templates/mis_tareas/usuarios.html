@@ -11,12 +11,6 @@
       <input type="submit" value="Añadir Usuario">
     </form>
 
-  <!--introduce tu contraseña:-->
-    <form  method="POST">
-      {% csrf_token %}
-      <label for="contraseña">Contraseña:</label>
-      <input type="password" id="contraseña" name="contraseña">
-      <input type="submit" value="Añadir Contraseña">
-    </form>
+  
     <p>Lista de usuarios</p>
 {% endblock %}
