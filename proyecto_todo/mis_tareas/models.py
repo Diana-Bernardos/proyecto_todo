@@ -19,9 +19,9 @@ class Tareas(models.Model):
 
     def __str__(self):
         return f"{self.nombre_tarea} - {self.estado}"
-      
+    
 class Usuarios(models.Model):
-  
+
     nombre_usuario = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     fecha_nacimiento = models.DateTimeField(auto_now_add=True)
