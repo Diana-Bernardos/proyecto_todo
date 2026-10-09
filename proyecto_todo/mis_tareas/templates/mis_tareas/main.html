@@ -3,8 +3,9 @@
 
     {% block content %}
   <h1>Mi lista de Tareas</h1>
+  <input>
 
-  <button><a href="{% url 'mis_tareas:añadir_tareas.html' %}">Crear Tarea</a></button>
+  <button>Crear Tarea</a></button>
   <div>
     {% for tarea in tareas %}
   <input type= "checkbox" id="titulo" name="tarea"> {{ tarea.titulo }}
