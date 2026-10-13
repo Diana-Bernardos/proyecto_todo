@@ -13,7 +13,7 @@ class Tareas(models.Model):
     descripcion = models.TextField(blank=True, null=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_vencimiento = models.DateField()
-    estado = models.CharField(max_length=10, choices=ESTADO_CHOICES, default='')
+    estado = models.TextField(max_length=102)
     usuario = models.ForeignKey('Usuarios', on_delete=models.PROTECT)
     estado = models.ForeignKey('Estados', on_delete=models.PROTECT)
 
@@ -31,7 +31,7 @@ class Usuarios(models.Model):
 
 
 class Estados(models.Model):
-    nombre_estado = models.CharField(max_length=100)
+    nombre_estado = models.CharField(max_length=102)
 
     def __str__(self):
         return self.nombre_estado

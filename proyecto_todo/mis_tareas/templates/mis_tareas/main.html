@@ -3,12 +3,12 @@
 
     {% block content %}
   <h1>Mi lista de Tareas</h1>
-  <input>
-
-  <button>Crear Tarea</a></button>
+  <br>
+  <h3>Crea una tarea</h3>
+  <button><a href= "/añadir"> Añadir tarea</a></button>
   <div>
-    {% for tarea in tareas %}
-  <input type= "checkbox" id="titulo" name="tarea"> {{ tarea.titulo }}
+    {% for x in tarea %}
+  <input type= "checkbox" id="titulo" name="tarea">{{ x }}
     {% endfor %}
   </div>
   <div class="calendario">
