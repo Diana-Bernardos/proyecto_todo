@@ -1,20 +1,66 @@
-{% extends "mis_tareas/master.html" %}
-{% block title %}Mi lista de Tareas{% endblock %}
+{% extends 'mis_tareas/master.html' %} 
 
-    {% block content %}
-  <h1>Mi lista de Tareas</h1>
-  <br>
-  <h3>Crea una tarea</h3>
-  <button><a href= "/añadir"> Añadir tarea</a></button>
-  <div>
-    {% for x in tarea %}
-  <input type= "checkbox" id="titulo" name="tarea">{{ x }}
-    {% endfor %}
-  </div>
-  <div class="calendario">
-    <h2>Calendario</h2>
-    <!-- aqui va el calendario -->
+{% block title %} Mi lista de Tareas {% endblock %}
 
+{% block content %}
+<div class="tareas-container">
+    <h1>Mi lista de Tareas</h1>
+    
+    <div class="seccion-crear">
+        <h3>Crea una tarea</h3>
+        <a href="/añadir" class="btn-añadir">Añadir tarea</a>
+    </div>
 
+    <div class="tarea">
+        <h3>Tareas pendientes</h3>
+        <ul>
+        {% for x in tarea %}
+            <li>
+                <input type="checkbox" id="tarea-{{ forloop.counter }}" name="tarea">
+                <a href="{% url "editar" x.id %}" >{{ x }}</a>
+            </li>
+        {% empty %}
+            <p>No hay tareas pendientes actualmente.</p>
+        {% endfor %}
+        </ul>
+    </div>
 
-    {% endblock %}
+    <div class="calendario">
+    <h2>Calendario {{ mes_actual }}</h2>
+    <!-- El grid lo podemos estilizar también por CSS, pero dejamos la estructura limpia -->
+    <div class="grid-calendario">
+        <!-- Cabecera de días de la semana -->
+        <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
+        
+        <!-- Recorremos la matriz de días que pasamos desde la vista de Django -->
+        {% for semana in calendar_matrix %}
+            {% for dia in semana %}
+                {% if dia == 0 %}
+                    <span class="dia vacio"></span>
+                {% else %}
+                    <!-- Celda individual del día con un diseño de caja -->
+                    <div class="dia-celda" style="padding: 5px; border: 1px solid #ccc; min-height: 80px; display: flex; flex-direction: column; background-color: #ffffff; text-align: left;">
+                        
+                        <!-- Enlace del número del día (redirige a /añadir con la fecha por GET) -->
+                        <a href="/añadir?fecha={{ anio_actual }}-{{ mes_actual|stringformat:'02d' }}-{{ dia|stringformat:'02d' }}" class="dia-numero" style="font-weight: bold; text-decoration: none; text-align: right; color: #333;">
+                            {{ dia }}
+                        </a>
+
+                        <!-- Contenedor para listar las tareas de este día específico -->
+                        <div class="tareas-del-dia" style="margin-top: 5px; font-size: 0.8rem;">
+                            {% for t in tarea %}
+                                {# Comparamos si la fecha de la tarea coincide con el año, mes y día de la celda #}
+                                {% if t.fecha.year == anio_actual and t.fecha.month == mes_actual and t.fecha.day == dia %}
+                                    <a href="{% url 'editar' t.id %}" style="display: block; background-color: #e0f0ff; color: #0066cc; padding: 2px 4px; margin-bottom: 2px; border-radius: 3px; text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{{ t.titulo }}">
+                                        {{ t.titulo }}
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

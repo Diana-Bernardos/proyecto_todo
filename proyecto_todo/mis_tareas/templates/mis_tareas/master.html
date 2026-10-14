@@ -1,11 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
+    <link rel ="stylesheet" href="{% static 'mis_tareas/style.css'%}">
 </head>
 <body>
+    <header>
+        <div class="logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/main">Inicio</a></li>
+                <li><a href="/lista">Archivo</a></li>
+            </ul>
+        </nav>
+    </header>
     {% block content %} {% endblock %}
 </body>
 

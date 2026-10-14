@@ -13,12 +13,11 @@ class Tareas(models.Model):
     descripcion = models.TextField(blank=True, null=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_vencimiento = models.DateField()
-    estado = models.TextField(max_length=102)
-    usuario = models.ForeignKey('Usuarios', on_delete=models.PROTECT)
+    usuario = models.ForeignKey('Usuarios', on_delete=models.PROTECT, null=True, blank=True)
     estado = models.ForeignKey('Estados', on_delete=models.PROTECT)
 
     def __str__(self):
-        return f"{self.nombre_tarea} - {self.estado}"
+        return f"{self.nombre_tarea}"
     
 class Usuarios(models.Model):
 
@@ -27,11 +26,11 @@ class Usuarios(models.Model):
     fecha_nacimiento = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return  f"{self.nombre_usuario} {self.apellido}"    
+        return  f"{self.nombre_usuario}"    
 
 
 class Estados(models.Model):
-    nombre_estado = models.CharField(max_length=102)
+    nombre_estado = models.CharField(max_length=50)
 
     def __str__(self):
         return self.nombre_estado

@@ -1,0 +1,199 @@
+/* Estilos generales */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #facefa;
+    margin: 0;
+    padding: 0;
+    color: #333333;
+}
+
+/* Encabezado y barra de navegación */
+header {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #444444;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #0066cc;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+nav ul li a:hover {
+    color: #003366;
+    text-decoration: underline;
+}
+
+/* Contenedor principal donde se inyectará el bloque content de las hijas */
+main, .content {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+/* Contenedor principal de la vista main */
+.tareas-container {
+    padding: 20px;
+}
+
+.tareas-container h1 {
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+/* Sección de crear tarea y botón */
+.seccion-crear {
+    margin-bottom: 25px;
+}
+
+.btn-añadir {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.btn-añadir:hover {
+    background-color: #218838;
+}
+
+/* Lista de tareas pendientes */
+.tarea {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.tarea h3 {
+    margin-top: 0;
+    color: #444444;
+}
+
+.tarea ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tarea li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eeeeee;
+    display: flex;
+    align-items: center;
+}
+
+.tarea li:last-child {
+    border-bottom: none;
+}
+
+.tarea input[type="checkbox"] {
+    margin-right: 12px;
+    transform: scale(1.2);
+}
+
+.tarea a {
+    text-decoration: none;
+    color: #0066cc;
+    font-weight: 500;
+}
+
+.tarea a:hover {
+    text-decoration: underline;
+    color: #004080;
+}
+
+/* Sección del Calendario */
+.calendario {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.calendario h2 {
+    margin-top: 0;
+    color: #444444;
+}
+
+.grid-calendario {
+    display: grid;
+    margin-top: 15px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 6px;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px; 
+    text-align: center;
+}
+
+.grid-calendario span {
+    font-weight: bold;
+    color: #666666;
+    padding: 8px 0;
+}
+
+/* Estilo para los días del calendario */
+.grid-calendario a.dia {
+    background-color: #ffffff;
+    color: #333333;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.grid-calendario a.dia:hover {
+    background-color: #0066cc;
+    color: #ffffff;
+    border-color: #0066cc;
+}
+
+.grid-calendario .vacio {
+    background-color: transparent;
+    border: none;
+}
+
+.grid-calendario {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    text-align: center;
+}
+
+.grid-calendario .dia-celda {
+    background-color: #ffffff;
+    border-radius: 4px;
+    transition: border-color 0.2s ease;
+}
+
+.grid-calendario .dia-celda:hover {
+    border-color: #0066cc;
+}

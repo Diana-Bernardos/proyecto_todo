@@ -5,6 +5,10 @@ Tarea
 
 {%block content%}
 <h1>Mis Tareas</h1>
-{% csrf_token %}
-{{form.as_p}}
+<form method= "POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" name="guardar">Guardar</button>
+    <button type="submit" name= "eliminar" >Eliminar</button>
+
 {%endblock%}
