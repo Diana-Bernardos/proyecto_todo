@@ -1,16 +1,12 @@
 {% extends "mis_tareas/master.html" %}
 {% block title %}Usuarios{% endblock %}
 {% block content %}
-    <h1>Introduce tu usuario y contraseña:</h1>
+    <h1>Introduce tu usuario</h1>
 
     <!--introduce tu usuario:-->
     <form method="POST">
       {% csrf_token %}
-      <label for="usuarios">Usuario:</label>
-      <input type="text" id="usuarios" name="usuarios">
-      <input type="submit" value="Añadir Usuario">
+      {{form.as_p}}
+      <button type="submit">Iniciar Sesion</button>
     </form>
-
-  
-    <p>Lista de usuarios</p>
 {% endblock %}

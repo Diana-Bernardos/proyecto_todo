@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest
 from django.template import loader
-from .forms import TareaForm
+from .forms import TareaForm, UsuarioForm
 from .models import Tareas, Estados, Usuarios
 import calendar
 from datetime import datetime
@@ -85,3 +85,6 @@ def editar_tarea(request, tareas_id):
 
     return render(request, 'mis_tareas/editar_tareas.html', {'form':form})
 
+def usuario(request):
+    form = UsuarioForm()
+    return render(request, 'mis_tareas/usuarios.html', {'form':form})

@@ -17,4 +17,9 @@ class TareaForm(forms.ModelForm):
                 attrs = {'type': 'date'})
         }
 
+class UsuarioForm(forms.ModelForm):
+    class Meta():
+        model = Usuarios
+        fields= ['nombre_usuario']
+        
 
