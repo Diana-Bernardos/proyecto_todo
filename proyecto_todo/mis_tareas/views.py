@@ -37,11 +37,15 @@ def crear_tarea(request):
 
     if request.method == 'POST':
         form = TareaForm(request.POST)
+
         if form.is_valid():
             estado_texto = request.POST.get('estado', '').strip().capitalize()
+
             objeto_estado = Estados.objects.get_or_create(nombre_estado=estado_texto)
+            
             tarea = form.save(commit=False)   
-            tarea.estado = objeto_estado     
+            tarea.estado = objeto_estado 
+
             tarea.save()                      
             return redirect('main')
     else:
@@ -53,17 +57,31 @@ def crear_tarea(request):
 
 def editar_tarea(request, tareas_id):
     tarea = get_object_or_404(Tareas, id= tareas_id)
+
     if request.method == "POST":
         if 'eliminar' in request.POST:
             tarea.delete()
             return redirect('main')
+        
         form = TareaForm(request.POST, instance=tarea)
         if form.is_valid():
-        
-            form.save()
+            tarea_editada= form.save(commit=False)
+
+            nombre_estado_ingresado = form.cleaned_data.get('estado')
+
+            if nombre_estado_ingresado:
+
+                estado_objeto, creado = Estados.objects.get_or_create(nombre_estado=nombre_estado_ingresado)
+                tarea_editada.estado = estado_objeto
+            else:
+                tarea_editada.estado = None
+
+            tarea_editada.save()
             return redirect('main')
     else:
-        form = TareaForm(instance=tarea)
+        estado_inicial = tarea.estado.nombre_estado if tarea.estado else ''
+
+        form = TareaForm(instance=tarea, initial={'estado':estado_inicial})
 
     return render(request, 'mis_tareas/editar_tareas.html', {'form':form})
 
