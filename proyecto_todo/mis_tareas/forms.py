@@ -18,4 +18,3 @@ class TareaForm(forms.ModelForm):
         }
 
 
-

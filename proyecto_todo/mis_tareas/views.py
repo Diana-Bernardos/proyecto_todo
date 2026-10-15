@@ -39,7 +39,7 @@ def crear_tarea(request):
         form = TareaForm(request.POST)
         if form.is_valid():
             estado_texto = request.POST.get('estado', '').strip().capitalize()
-            objeto_estado, creado = Estados.objects.get_or_create(nombre_estado=estado_texto)
+            objeto_estado = Estados.objects.get_or_create(nombre_estado=estado_texto)
             tarea = form.save(commit=False)   
             tarea.estado = objeto_estado     
             tarea.save()                      
@@ -59,14 +59,11 @@ def editar_tarea(request, tareas_id):
             return redirect('main')
         form = TareaForm(request.POST, instance=tarea)
         if form.is_valid():
+        
             form.save()
             return redirect('main')
     else:
         form = TareaForm(instance=tarea)
+
     return render(request, 'mis_tareas/editar_tareas.html', {'form':form})
 
-def eliminar_tarea(request):
-    return render(request, 'mis_tareas/eliminar_tareas.html')
-
-def lista(request):
-    return render(request, 'mis_Tareas/lista_tareas.html')

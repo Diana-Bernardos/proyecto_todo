@@ -17,7 +17,8 @@
         {% for x in tarea %}
             <li>
                 <input type="checkbox" id="tarea-{{ forloop.counter }}" name="tarea">
-                <a href="{% url "editar" x.id %}" >{{ x }}</a>
+                <a href="{% url "editar" x.id %}" >{{ x }}
+                </a>
             </li>
         {% empty %}
             <p>No hay tareas pendientes actualmente.</p>
@@ -27,7 +28,7 @@
 
     <div class="calendario">
     <h2>Calendario {{ mes_actual }}</h2>
-    <!-- El grid lo podemos estilizar también por CSS, pero dejamos la estructura limpia -->
+    
     <div class="grid-calendario"> 
         <!-- Cabecera de días de la semana -->
         <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
