@@ -86,5 +86,12 @@ def editar_tarea(request, tareas_id):
     return render(request, 'mis_tareas/editar_tareas.html', {'form':form})
 
 def usuario(request):
-    form = UsuarioForm()
+    if request.method=='POST':
+        form = UsuarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('main')
+    else:
+        form=UsuarioForm()
+
     return render(request, 'mis_tareas/usuarios.html', {'form':form})
