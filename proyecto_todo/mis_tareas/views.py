@@ -32,6 +32,10 @@ def main(request):
     }
     return render(request, 'mis_tareas/main.html', context)
 
+@login_required(login_url='login')
+def inicio_privado(request):
+    return render(request, 'mis_tareas/inicio_privado.html')
+
 
 def crear_tarea(request):
     fecha_inicial = request.GET.get('fecha', None)
@@ -96,5 +100,3 @@ def usuario(request):
         form=UsuarioForm()
 
     return render(request, 'mis_tareas/usuarios.html', {'form':form})
-
-
