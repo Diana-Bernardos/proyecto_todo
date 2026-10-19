@@ -5,6 +5,7 @@ from .forms import TareaForm, UsuarioForm
 from .models import Tareas, Estados, Usuarios
 import calendar
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
 
 def prueba(request):
     prueba1 = {
@@ -95,3 +96,5 @@ def usuario(request):
         form=UsuarioForm()
 
     return render(request, 'mis_tareas/usuarios.html', {'form':form})
+
+

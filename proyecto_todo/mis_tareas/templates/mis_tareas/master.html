@@ -11,10 +11,19 @@
     <header>
         <div class="logo">
         </div>
+        {% if user.is_authenticated %}
+            <p>Hola, {{ user.username }}!</p>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+        {% else %}
+            <a href="{% url 'login' %}">Iniciar sesión</a>
+        {% endif %}
         <nav>
             <ul>
-                <li><a href="/main">Inicio</a></li>
-            
+                <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                <li><a href="{% url 'crear_tarea' %}">Crear Tarea</a></li>
+                <li><a href="{% url 'usuario' %}">Usuarios</a></li>
 
             </ul>
         </nav>

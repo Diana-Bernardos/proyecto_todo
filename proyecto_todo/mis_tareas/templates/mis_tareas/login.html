@@ -1,0 +1,16 @@
+{% extends "mis_tareas/master.html" %}
+{% block title %}login{% endblock %}
+{% block content %}
+    <h1>Iniciar sesion</h1>
+
+    {%if form.errors %}
+      <p>El usuario o la contraseñas no son correctos</p>
+    {%endif %}
+
+    <!--introduce tu usuario:-->
+    <form method="POST">
+      {% csrf_token %}
+      {{form.as_p}}
+      <button type="submit">Entrar</button>
+    </form>
+{% endblock %}
