@@ -13,6 +13,10 @@ def prueba(request):
         }
     return render(request, 'mis_tareas/main.html', prueba1)
 
+def login_view(request):
+    return render(request, 'mis_tareas/login.html')
+
+@login_required
 def main(request):
     ahora = datetime.now()
     anio = int(ahora.year)
@@ -48,7 +52,7 @@ def crear_tarea(request):
             tarea.estado = objeto_estado 
 
             tarea.save()                      
-            return redirect('main')
+            return redirect('inicio')
     else:
         initial_data ={}
         if fecha_inicial:
@@ -62,7 +66,7 @@ def editar_tarea(request, tareas_id):
     if request.method == "POST":
         if 'eliminar' in request.POST:
             tarea.delete()
-            return redirect('main')
+            return redirect('inicio')
         
         form = TareaForm(request.POST, instance=tarea)
         if form.is_valid():
@@ -78,7 +82,7 @@ def editar_tarea(request, tareas_id):
                 tarea_editada.estado = None
 
             tarea_editada.save()
-            return redirect('main')
+            return redirect('inicio')
     else:
         estado_inicial = tarea.estado.nombre_estado if tarea.estado else ''
 
@@ -91,7 +95,7 @@ def usuario(request):
         form = UsuarioForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('main')
+            return redirect('inicio')
     else:
         form=UsuarioForm()
 

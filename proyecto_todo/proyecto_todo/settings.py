@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ktp1+di_$n3#n*wcfo)nfph!t5ik+!w(+ixdekybeaw(5%)mgb',
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True,
+DEBUG = True
 
-ALLOWED_HOSTS = [],
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,9 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mis_tareas',
-    'login_url'='login/',
-    'login_redirect_url'='inicio/',
-    'logout_redirect_url'='login/',
+    
 ]
 
 MIDDLEWARE = [
@@ -129,3 +127,9 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+LOGIN_URL ="login"
+
+LOGIN_REDIRECT_URL = "inicio"
+
+LOGOUT_REDIRECT_URL ="login"
