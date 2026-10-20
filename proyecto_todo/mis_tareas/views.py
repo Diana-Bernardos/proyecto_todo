@@ -6,6 +6,8 @@ from .models import Tareas, Estados, Usuarios
 import calendar
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
 def prueba(request):
     prueba1 = {
@@ -103,3 +105,14 @@ def usuario(request):
         form=UsuarioForm()
 
     return render(request, 'mis_tareas/usuarios.html', {'form':form})
+
+def registro(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            usuario_nuevo = form.save()
+            login(request, usuario_nuevo)
+            return redirect('inicio')
+    else:
+        form = UserCreationForm()
+    return render(request, 'mis_tareas/registro.html', {'form': form})

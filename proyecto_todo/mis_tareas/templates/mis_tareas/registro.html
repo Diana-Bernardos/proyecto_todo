@@ -1,0 +1,14 @@
+{% extends "mis_tareas/master.html" %}
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+    <h1>Crear cuenta</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Registrarme</button>
+    </form>
+
+    <p>¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
+{% endblock %}
