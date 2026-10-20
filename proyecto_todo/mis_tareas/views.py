@@ -50,8 +50,7 @@ def crear_tarea(request):
         if form.is_valid():
             estado_texto = request.POST.get('estado', '').strip().capitalize()
 
-            objeto_estado = Estados.objects.get_or_create(nombre_estado=estado_texto)
-            
+            objeto_estado, creado = Estados.objects.get_or_create(nombre_estado=estado_texto)            
             tarea = form.save(commit=False)   
             tarea.estado = objeto_estado 
 

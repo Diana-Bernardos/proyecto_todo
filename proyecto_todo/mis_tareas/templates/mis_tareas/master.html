@@ -9,13 +9,9 @@
 </head>
 <body>
     <header>
-        <div class="logo">
-        </div>
+        <div class="logo"></div>
         {% if user.is_authenticated %}
             <p>Hola, {{ user.username }}!</p>
-            <a href="{% url 'inicio_privado' %}">Zona Privada</a>
-        {% endif %}
-        {% if user.is_authenticated %}
             <form method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
                 <button type="submit">Cerrar sesión</button>

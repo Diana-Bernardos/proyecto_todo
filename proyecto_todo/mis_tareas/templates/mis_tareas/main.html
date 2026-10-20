@@ -8,7 +8,7 @@
     
     <div class="seccion-crear">
         <h3>Crea una tarea</h3>
-        <a href="/añadir" class="btn-añadir">Añadir tarea</a>
+        <a href="{% url 'crear_tarea' %}" class="btn-añadir">Añadir tarea</a>
     </div>
 
     <div class="tarea">
@@ -17,7 +17,7 @@
         {% for x in tarea %}
             <li>
                 <input type="checkbox" id="tarea-{{ forloop.counter }}" name="tarea">
-                <a href="{% url "editar" x.id %}" >{{ x }}
+                <a href="{% url 'editar_id' x.id %}">{{ x }}</a>
                 </a>
             </li>
         {% empty %}
@@ -27,7 +27,7 @@
     </div>
 
     <div class="calendario">
-    <h2>Calendario {{ mes_actual }}</h2>
+    <h2>Calendario {{ mes_actual }}{{ anio_actual }}</h2>
     
     <div class="grid-calendario"> 
         <!-- Cabecera de días de la semana -->
