@@ -39,10 +39,10 @@
                 {% if dia == 0 %}
                     <span class="dia vacio"></span>
                 {% else %}
-                    <!-- Celda individual del día con un diseño de caja -->
+
                     <div class="dia-celda" style="padding: 5px; border: 1px solid #ccc; min-height: 80px; display: flex; flex-direction: column; background-color: #ffffff; text-align: left;">
                         
-                        <!-- Enlace del número del día (redirige a /añadir con la fecha por GET) -->
+                        
                         <a href="/añadir?fecha={{ anio_actual }}-{{ mes_actual|stringformat:'02d' }}-{{ dia|stringformat:'02d' }}" class="dia-numero" style="font-weight: bold; text-decoration: none; text-align: right; color: #333;">
                             {{ dia }}
                         </a>

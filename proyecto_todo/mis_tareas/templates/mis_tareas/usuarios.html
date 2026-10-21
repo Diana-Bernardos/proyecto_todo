@@ -3,7 +3,6 @@
 {% block content %}
     <h1>Introduce tu usuario</h1>
 
-    <!--introduce tu usuario:-->
     <form method="POST">
       {% csrf_token %}
       {{form.as_p}}
