@@ -189,6 +189,13 @@ button[name="eliminar"]:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
+.nav-calendario{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
 .grid-calendario {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -207,17 +214,23 @@ button[name="eliminar"]:hover {
 }
 
 .dia-celda {
+    min-height: 100px;
+    height: 100px;
     background-color: #ffffff;
     padding: 8px;
-    min-height: 80px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    border-radius: 4px;
+    justify-content: flex-start;
+    border-radius: 1px solid #e0e0e0;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .dia.vacio {
-    background-color: #fdfdfd;
+    min-height: 100px;
+    height: 100px;
+    background-color: #f1f1f1;
+    border: 1px solid transparent;
 }
 
 .dia-numero {
@@ -230,6 +243,78 @@ button[name="eliminar"]:hover {
 
 .dia-numero:hover {
     color: #3498db;
+}
+
+.btn-nav{
+    text-decoration: none;
+    color: #333;
+}
+
+.btn-nav:hover{
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+.tareas-del-dia {
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow-y: auto; /* Si hay muchas tareas, aparece scroll interno sin estirar la celda */
+    max-height: 60px;
+}
+
+.tarea-badge {
+    background-color: #3498db;
+    color: white;
+    font-size: 0.75rem;
+    padding: 2px 5px;
+    border-radius: 3px;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tarea-badge:hover {
+    background-color: #2980b9;
+}
+
+.tarea-badge.estado-activo { 
+    background-color: #3498db; 
+}
+
+.tarea-badge.estado-pospuesto { 
+    background-color: #e67e22; 
+}
+
+.tarea-badge.estado-pendiente { 
+    background-color: #f39c12; 
+}
+
+.tarea-badge.estado-finalizado { 
+    background-color: #e74c3c; 
+}
+
+.tarea-badge.estado-entregado { 
+    background-color: #2ecc71; 
+}
+
+.tarea-badge:hover {
+    filter: brightness(0.9); 
+}
+
+.navegacion-calendario .btn-nav {
+    background-color: #2c3e50;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.navegacion-calendario .btn-nav:hover {
+    background-color: #34495e;
 }
 
 /* --- ENLACES GENERALES Y ERRORES --- */

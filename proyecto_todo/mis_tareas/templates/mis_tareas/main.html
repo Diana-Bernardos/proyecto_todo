@@ -27,7 +27,11 @@
     </div>
 
     <div class="calendario">
-    <h2>Calendario {{ mes_actual }}{{ anio_actual }}</h2>
+        <div class="nav-calendario">
+            <a href ="?anio ={{anio_Anterior}} & mes ={{mes_anterior}}" class = "btn-nav">← Mes anterior</a>
+            <h2>Calendario: {{mes_actual}} / {{anio_actual}}</h2>
+            <a href="?anio={{ anio_siguiente }}&mes={{ mes_siguiente }}" class="btn-nav">Mes siguiente →</a>
+        </div>
     
     <div class="grid-calendario"> 
         <!-- Cabecera de días de la semana -->
@@ -39,13 +43,21 @@
                 {% if dia == 0 %}
                     <span class="dia vacio"></span>
                 {% else %}
-
-                    <div class="dia-celda" style="padding: 5px; border: 1px solid #ccc; min-height: 80px; display: flex; flex-direction: column; background-color: #ffffff; text-align: left;">
-                        
-                        
-                        <a href="/añadir?fecha={{ anio_actual }}-{{ mes_actual|stringformat:'02d' }}-{{ dia|stringformat:'02d' }}" class="dia-numero" style="font-weight: bold; text-decoration: none; text-align: right; color: #333;">
+                    <div class="dia-celda">
+                        <a href="/añadir?fecha={{ anio_actual }}-{{ mes_actual|stringformat:'02d' }}-{{ dia|stringformat:'02d' }}" class="dia-numero">
                             {{ dia }}
                         </a>
+                        <div class="tareas-del-dia">
+                            {% for tarea in tarea %}
+                                {% if tarea.fecha_vencimiento.day == dia %}
+                                    <a href="{% url 'editar_id' tarea.id %}" 
+                                    class="tarea-badge estado-{{tarea.estado.nombre_estado|lower}}" 
+                                    title="{{ tarea.nombre_tarea }}">
+                                        {{ tarea.nombre_tarea }}
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
                 {% endif %}
             {% endfor %}

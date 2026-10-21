@@ -32,20 +32,35 @@ def login_view(request):
 @login_required
 def main(request):
     ahora = datetime.now()
-    anio = int(ahora.year)
-    mes = int(ahora.month)
+    anio = int(request.GET.get('anio', ahora.year))
+    mes = int(request.GET.get('mes', ahora.month))
+    if mes == 1:
+        mes_anterior, anio_anterior = 12, anio -1
+    else:
+        mes_anterior, anio_anterior = mes -1, anio
 
-    # Genera la matriz del mes (empezando en domingo o lunes)
-    cal_data = calendar.monthcalendar(anio, mes)
-    nombre_mes = calendar.month_name[mes]
+    if mes == 12:
+        mes_siguiente , anio_siguiente = mes +1, anio +1
+    else:
+        mes_siguiente, anio_siguiente = mes +1, anio
 
-    tarea = Tareas.objects.filter(usuario = request.user).select_related('estado').order_by('-fecha_creacion')  
+    cal = calendar.Calendar(firstweekday=0)
+    calendar_matrix = cal.monthdayscalendar(anio, mes)
+
+    tarea = Tareas.objects.filter(
+            usuario = request.user,  
+            fecha_vencimiento__year = anio,
+            fecha_vencimiento__month = mes).select_related('estado').order_by('-fecha_creacion')  
 
     context = {
     'tarea': tarea,
-    'calendar_matrix': cal_data,
-    'mes_actual': nombre_mes,
+    'calendar_matrix': calendar_matrix,
+    'mes_actual': mes,
     'anio_actual': anio,
+    'mes_anterior': mes_anterior,
+    'anio_anterior': anio_anterior,
+    'mes_siguiente': mes_siguiente,
+    'anio_siguiente': anio_siguiente
     }
     return render(request, 'mis_tareas/main.html', context)
 
@@ -91,15 +106,5 @@ def editar_tarea(request, tareas_id):
 
     return render(request, 'mis_tareas/editar_tareas.html', {'form':form})
 
-@login_required
-def usuario(request):
-    if request.method=='POST':
-        form = UsuarioForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('inicio')
-    else:
-        form=UsuarioForm()
 
-    return render(request, 'mis_tareas/usuarios.html', {'form':form})
 
