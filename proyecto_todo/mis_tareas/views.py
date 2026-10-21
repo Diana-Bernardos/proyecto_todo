@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest
 from django.template import loader
-from .forms import TareaForm, UsuarioForm
-from .models import Tareas, Estados, Usuarios
+from .forms import TareaForm
+from .models import Tareas, Estados
 import calendar
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
@@ -14,6 +14,17 @@ def prueba(request):
         'tarea': ['tarea1', 'tarea2']
         }
     return render(request, 'mis_tareas/main.html', prueba1)
+
+def registro(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            usuario_nuevo = form.save()
+            login(request, usuario_nuevo)
+            return redirect('inicio')
+    else:
+        form = UserCreationForm()
+    return render(request, 'mis_tareas/registro.html', {'form': form})
 
 def login_view(request):
     return render(request, 'mis_tareas/login.html')
@@ -28,7 +39,7 @@ def main(request):
     cal_data = calendar.monthcalendar(anio, mes)
     nombre_mes = calendar.month_name[mes]
 
-    tarea = Tareas.objects.all()  
+    tarea = Tareas.objects.filter(usuario = request.user).select_related('estado').order_by('-fecha_creacion')  
 
     context = {
     'tarea': tarea,
@@ -42,7 +53,7 @@ def main(request):
 def inicio_privado(request):
     return render(request, 'mis_tareas/inicio_privado.html')
 
-
+@login_required
 def crear_tarea(request):
     fecha_inicial = request.GET.get('fecha', None)
 
@@ -50,12 +61,8 @@ def crear_tarea(request):
         form = TareaForm(request.POST)
 
         if form.is_valid():
-            estado_texto = request.POST.get('estado', '').strip().capitalize()
-
-            objeto_estado, creado = Estados.objects.get_or_create(nombre_estado=estado_texto)            
             tarea = form.save(commit=False)   
-            tarea.estado = objeto_estado 
-
+            tarea.usuario = request.user
             tarea.save()                      
             return redirect('inicio')
     else:
@@ -65,6 +72,7 @@ def crear_tarea(request):
         form = TareaForm(initial=initial_data)
     return render(request, 'mis_tareas/añadir_tareas.html', {'form': form})
 
+@login_required
 def editar_tarea(request, tareas_id):
     tarea = get_object_or_404(Tareas, id= tareas_id)
 
@@ -75,26 +83,15 @@ def editar_tarea(request, tareas_id):
         
         form = TareaForm(request.POST, instance=tarea)
         if form.is_valid():
-            tarea_editada= form.save(commit=False)
-
-            nombre_estado_ingresado = form.cleaned_data.get('estado')
-
-            if nombre_estado_ingresado:
-
-                estado_objeto, creado = Estados.objects.get_or_create(nombre_estado=nombre_estado_ingresado)
-                tarea_editada.estado = estado_objeto
-            else:
-                tarea_editada.estado = None
-
-            tarea_editada.save()
+            form.save()
             return redirect('inicio')
+        
     else:
-        estado_inicial = tarea.estado.nombre_estado if tarea.estado else ''
-
-        form = TareaForm(instance=tarea, initial={'estado':estado_inicial})
+        form = TareaForm(instance=tarea)
 
     return render(request, 'mis_tareas/editar_tareas.html', {'form':form})
 
+@login_required
 def usuario(request):
     if request.method=='POST':
         form = UsuarioForm(request.POST)
@@ -106,13 +103,3 @@ def usuario(request):
 
     return render(request, 'mis_tareas/usuarios.html', {'form':form})
 
-def registro(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            usuario_nuevo = form.save()
-            login(request, usuario_nuevo)
-            return redirect('inicio')
-    else:
-        form = UserCreationForm()
-    return render(request, 'mis_tareas/registro.html', {'form': form})

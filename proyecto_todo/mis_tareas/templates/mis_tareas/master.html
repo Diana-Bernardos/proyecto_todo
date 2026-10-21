@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <div class="logo"></div>
+        <div class="logo">
         {% if user.is_authenticated %}
             <p>Hola, {{ user.username }}!</p>
             <form method="post" action="{% url 'logout' %}">
@@ -17,15 +17,13 @@
                 <button type="submit">Cerrar sesión</button>
             </form>
         {% else %}
-            <a href="{% url 'login' %}">Iniciar sesión</a>
-            <a href="{% url 'registro' %}">Registrarse</a>
+            <a href="{% url 'login' %}" style>Iniciar sesión</a>
         {% endif %}
+        </div>
         <nav>
             <ul>
                 <li><a href="{% url 'inicio' %}">Inicio</a></li>
                 <li><a href="{% url 'crear_tarea' %}">Crear Tarea</a></li>
-                <li><a href="{% url 'usuario' %}">Usuarios</a></li>
-
             </ul>
         </nav>
     </header>

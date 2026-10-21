@@ -1,199 +1,248 @@
-/* Estilos generales */
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #facefa;
+/* --- ESTILOS GENERALES Y RESET --- */
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    color: #333333;
 }
 
-/* Encabezado y barra de navegación */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #d1f5e9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* --- HEADER Y NAVEGACIÓN --- */
 header {
     background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem 2rem;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
 }
 
-.logo {
+header .logo {
     font-weight: bold;
     font-size: 1.2rem;
-    color: #444444;
+    color: #2c3e50;
 }
 
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-nav ul li {
-    margin-left: 20px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #0066cc;
-    font-weight: bold;
-    transition: color 0.2s ease;
-}
-
-nav ul li a:hover {
-    color: #003366;
-    text-decoration: underline;
-}
-
-/* Contenedor principal donde se inyectará el bloque content de las hijas */
-main, .content {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-/* Contenedor principal de la vista main */
-.tareas-container {
-    padding: 20px;
-}
-
-.tareas-container h1 {
-    color: #333333;
-    margin-bottom: 20px;
-}
-
-/* Sección de crear tarea y botón */
-.seccion-crear {
-    margin-bottom: 25px;
-}
-
-.btn-añadir {
+header p {
     display: inline-block;
-    background-color: #28a745;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
+    margin-right: 1rem;
+    font-weight: 500;
+}
+
+header form {
+    display: inline-block;
+}
+header a{
     text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.2s ease;
+    color: #555;
+    font-weight: 600;
+    transition: color 0.2s;
 }
 
-.btn-añadir:hover {
-    background-color: #218838;
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+    width: 100%;
 }
 
-/* Lista de tareas pendientes */
-.tarea {
-    background-color: #ffffff;
-    padding: 20px;
+header nav a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+header nav a:hover {
+    color: #3498db;
+}
+
+/* --- CONTENEDORES Y TARJETAS GENERALES --- */
+.tareas-container, 
+form:not(header form) {
+    background: #ffffff;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.tarea h3 {
-    margin-top: 0;
-    color: #444444;
+h1, h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 1.2rem;
+}
+
+/* --- ESTILOS PARA FORMULARIOS (form.as_p) --- */
+form p {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: #555;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form textarea,
+form select {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+    border-color: #3498db;
+}
+
+/* --- BOTONES --- */
+button[type="submit"],
+.btn-añadir {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+button[type="submit"]:hover,
+.btn-añadir:hover {
+    background-color: #2980b9;
+}
+
+/* Botón secundario o de eliminar (si aplica) */
+button[name="eliminar"] {
+    background-color: #e74c3c;
+}
+
+button[name="eliminar"]:hover {
+    background-color: #c0392b;
+}
+
+/* --- SECCIÓN DE TAREAS (main.html) --- */
+.seccion-crear {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
 }
 
 .tarea ul {
     list-style: none;
     padding: 0;
-    margin: 0;
 }
 
 .tarea li {
-    padding: 8px 0;
-    border-bottom: 1px solid #eeeeee;
     display: flex;
     align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f9f9f9;
 }
 
-.tarea li:last-child {
-    border-bottom: none;
-}
-
-.tarea input[type="checkbox"] {
-    margin-right: 12px;
+.tarea li input[type="checkbox"] {
+    margin-right: 1rem;
     transform: scale(1.2);
 }
 
-.tarea a {
+.tarea li a {
     text-decoration: none;
-    color: #0066cc;
-    font-weight: 500;
+    color: #333;
 }
 
-.tarea a:hover {
+.tarea li a:hover {
+    color: #3498db;
     text-decoration: underline;
-    color: #004080;
 }
 
-/* Sección del Calendario */
+/* --- CALENDARIO --- */
 .calendario {
-    background-color: #ffffff;
-    padding: 20px;
+    max-width: 900px;
+    margin: 2rem auto;
+    background: #ffffff;
+    padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.calendario h2 {
-    margin-top: 0;
-    color: #444444;
-}
-
-.grid-calendario {
-    display: grid;
-    margin-top: 15px;
-    background-color: #f9f9f9;
-    padding: 10px;
-    border-radius: 6px;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px; 
-    text-align: center;
-}
-
-.grid-calendario span {
-    font-weight: bold;
-    color: #666666;
-    padding: 8px 0;
-}
-
-/* Estilo para los días del calendario */
-.grid-calendario a.dia {
-    background-color: #ffffff;
-    color: #333333;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-}
-
-.grid-calendario a.dia:hover {
-    background-color: #0066cc;
-    color: #ffffff;
-    border-color: #0066cc;
-}
-
-.grid-calendario .vacio {
-    background-color: transparent;
-    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .grid-calendario {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
+    background-color: #eee;
+    padding: 5px;
+    border-radius: 6px;
+}
+
+.grid-calendario span:not(.dia) {
+    background-color: #f8f9fa;
     text-align: center;
+    font-weight: bold;
+    padding: 10px 0;
+    color: #555;
 }
 
-.grid-calendario .dia-celda {
+.dia-celda {
     background-color: #ffffff;
+    padding: 8px;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border-radius: 4px;
-    transition: border-color 0.2s ease;
 }
 
-.grid-calendario .dia-celda:hover {
-    border-color: #0066cc;
+.dia.vacio {
+    background-color: #fdfdfd;
+}
+
+.dia-numero {
+    font-weight: bold;
+    text-decoration: none;
+    text-align: right;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.dia-numero:hover {
+    color: #3498db;
+}
+
+/* --- ENLACES GENERALES Y ERRORES --- */
+p a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+/* Errores de formulario */
+form + p, p {
+    color: #555;
 }
